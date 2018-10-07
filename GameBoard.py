@@ -473,6 +473,76 @@ class GameBoard:
 		
 		for _move in self.eligibleWhiteMoves:
 			
-			letterToPrint = ""
+			letterToPrint = self.switchlettercoordinate(_move.letterCoordinate)
 			
+			# Print out the possible move
+			print("Move", (counter + 1), ":", letterToPrint, ",", (_move.numberCoordinate + 1))
 			
+			counter += 1
+			
+		# end for _move in self.eligibleWhiteMoves:
+		
+		_moveChoice = int(input("Please enter a number that corresponds to one of the moves on the list."))
+		
+		while _moveChoice > len(self.eligibleWhiteMoves) or _moveChoice < 0:
+			
+			_moveChoice = input("That was not a valid move selection. Please review the list of possible\n"
+			                    "moves and re-enter your chooice")
+			print("")
+		
+		# end movechoice validation
+	
+		playerSelection = self.eligibleWhiteMoves[_moveChoice - 1]
+		
+		# Assign the appropriate color to the grid coordinates
+		self.setcoordinate("W", playerSelection.letterCoordinate, playerSelection.numberCoordinate)
+		
+		# Loop through the list and apply the rest of the changes
+		for changeColor in self.eligibleWhiteMoves[_moveChoice - 1].piecesToChange:
+			
+			# Change the color of the appropriate pieces
+			self.setcoordinate("W", changeColor.letterCoordinate, changeColor.numberCoordinate)
+			
+		# end for all the pieces in the pieces to change list
+	
+	# end print white move list
+	
+	def printBlackMovesList(self):
+		
+		print("Possible moves for the white player")
+		print("")
+		
+		counter = 0
+		
+		for _move in self.eligibleBlackMoves:
+			letterToPrint = self.switchlettercoordinate(_move.letterCoordinate)
+			
+			# Print out the possible move
+			print("Move", (counter + 1), ":", letterToPrint, ",", (_move.numberCoordinate + 1))
+			
+			counter += 1
+		
+		# end for _move in self.eligibleWhiteMoves:
+		
+		_moveChoice = int(input("Please enter a number that corresponds to one of the moves on the list."))
+		
+		while _moveChoice > len(self.eligibleBlackMoves) or _moveChoice < 0:
+			_moveChoice = input("That was not a valid move selection. Please review the list of possible\n"
+			                    "moves and re-enter your chooice")
+			print("")
+		
+		# end movechoice validation
+		
+		playerSelection = self.eligibleBlackMoves[_moveChoice - 1]
+		
+		# Assign the appropriate color to the grid coordinates
+		self.setcoordinate("B", playerSelection.letterCoordinate, playerSelection.numberCoordinate)
+		
+		# Loop through the list and apply the rest of the changes
+		for changeColor in self.eligibleBlackMoves[_moveChoice - 1].piecesToChange:
+			# Change the color of the appropriate pieces
+			self.setcoordinate("B", changeColor.letterCoordinate, changeColor.numberCoordinate)
+
+		# end for all the pieces in the pieces to change list
+
+	# end print white move list
