@@ -443,3 +443,36 @@ class GameBoard:
 	
 		# end for blackPiece in self.blacklist
 	
+	# end make movelist()
+	
+	def switchlettercoordinate(self, _moveLetterCoordinate):
+	
+		switcher = {
+			0: "A",
+			1: "B",
+			2: "C",
+			3: "D",
+			4: "E",
+			5: "F",
+			6: "G",
+			7: "H"
+		}
+		
+		_moveLetterCoordinate = switcher.get(_moveLetterCoordinate)
+		
+		return _moveLetterCoordinate
+	
+	# end switch letter coordinate
+
+	def printWhiteMoveList(self):
+		
+		print("Possible moves for the white player")
+		print("")
+		
+		counter = 0
+		
+		for _move in self.eligibleWhiteMoves:
+			
+			letterToPrint = ""
+			
+			
